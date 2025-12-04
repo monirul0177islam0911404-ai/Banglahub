@@ -141,7 +141,15 @@ function render(list){
         <div class="badge views-badge">👁️ ${escape(item.views || '0')}</div>
         <div class="badge duration-badge">⏱ ${escape(item.duration || '')}</div>
       </div>
-
+<style>.title{
+    font-weight:700;
+    font-size:15px;
+    line-height:1.2;
+    min-height:44px;
+    overflow:hidden;
+    color:white;  /* 🔥 Title now white */
+}
+<style>
       <div class="body">
         <div class="title">${escape(item.title||'Untitled')}</div>
         <div class="meta-row">

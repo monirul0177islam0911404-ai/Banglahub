@@ -1,170 +1,252 @@
 <!doctype html>
 <html lang="bn">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BanglaHub</title>
+
 <style>
 :root{
-  --bg:#07181a;
-  --card:#0f2a2b;
-  --muted:#9fb0b0;
-  --accent:#ffb400;
-  --like:#184b56;
+    --bg:#051416;
+    --header:#082629;
+    --card:#0c2426;
+    --muted:#9fb5b5;
+    --accent:#00c2ff;
+    --like-bg:#0b3d46;
+    --like-text:#ffdf4d;
 }
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:#fff}
-.header{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#0b3a3b}
-.brand{font-weight:800;font-size:20px}
-.join{background:#00c2ff;color:#002;padding:6px 10px;border-radius:8px;text-decoration:none;font-weight:700}
 
-/* grid - desktop 4, tablet 2, mobile 2 */
-.container{max-width:1200px;margin:14px auto;padding:0 12px}
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+    background:var(--bg);
+    font-family:Arial,Helvetica,sans-serif;
+    color:white;
+}
+
+/* HEADER */
+.header{
+    background:var(--header);
+    padding:12px 16px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.brand{
+    font-weight:800;
+    font-size:22px;
+    color:white;
+}
+.join{
+    background:var(--accent);
+    color:#003;
+    padding:6px 10px;
+    font-weight:700;
+    text-decoration:none;
+    border-radius:8px;
+}
+
+/* CONTAINER */
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:14px;
+}
+
+/* GRID: desktop=4, tablet=2, mobile=2 */
 .video-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:14px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
 }
 @media(max-width:1024px){
-  .video-grid{grid-template-columns:repeat(2,1fr)}
+    .video-grid{grid-template-columns:repeat(2,1fr);}
 }
 @media(max-width:520px){
-  .video-grid{grid-template-columns:repeat(2,1fr)}
+    .video-grid{grid-template-columns:repeat(2,1fr);}
 }
 
-/* card */
-.card{background:var(--card);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
-.thumb-wrap{position:relative;width:100%;padding-top:100%; /* 1:1 square */ background:#000}
-.thumb-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;border-radius:6px}
+/* CARD */
+.card{
+    background:var(--card);
+    border-radius:12px;
+    overflow:hidden;
+    transition:0.25s;
+}
+.card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 5px 15px rgba(0,0,0,0.45);
+}
 
-/* overlay badges */
+/* THUMBNAIL AREA */
+.thumb-wrap{
+    position:relative;
+    padding-top:100%; /* 1:1 square */
+    overflow:hidden;
+}
+.thumb-wrap img{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+/* PREMIUM PLAY ICON */
+.play-overlay{
+    position:absolute;
+    top:50%; left:50%;
+    transform:translate(-50%,-50%);
+    width:78px; height:78px;
+    border-radius:50%;
+    background:rgba(0,0,0,0.45);
+    display:flex; justify-content:center; align-items:center;
+    backdrop-filter:blur(4px);
+}
+.play-overlay svg{
+    width:40px;
+    height:40px;
+    fill:white;
+    opacity:0.9;
+}
+
+/* BADGES */
 .badge{
-  position:absolute;
-  bottom:8px;
-  padding:6px 8px;
-  border-radius:8px;
-  background:rgba(0,0,0,0.6);
-  color:#fff;
-  font-weight:700;
-  font-size:13px;
-  display:flex;
-  align-items:center;
-  gap:6px;
+    position:absolute;
+    bottom:8px;
+    padding:5px 8px;
+    font-size:13px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    background:rgba(0,0,0,0.55);
+    border-radius:6px;
+    font-weight:700;
 }
-.views-badge{left:8px}
-.duration-badge{right:8px}
+.views-badge{left:8px;}
+.duration-badge{right:8px;}
 
-/* play overlay (semi-transparent circle) */
-.play-overlay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:78px;height:78px;border-radius:50%;background:rgba(3,3,3,0.45);display:flex;align-items:center;justify-content:center;pointer-events:none}
-.play-overlay svg{width:38px;height:38px;fill:#fff;opacity:0.95}
+/* CARD BODY */
+.body{
+    padding:10px;
+}
 
-/* text area */
-.body{padding:10px;display:flex;flex-direction:column;gap:8px}
-.title{font-weight:700;font-size:15px;line-height:1.2;min-height:44px;overflow:hidden}
-.meta-row{display:flex;justify-content:space-between;align-items:center}
+/* TITLE ★ NOW WHITE + PREMIUM */
+.title{
+    font-size:15px;
+    font-weight:700;
+    line-height:1.25;
+    min-height:42px;
+    color:white;        /* ✔ Title now white */
+}
 
-/* like badge under title, right side */
-.like-badge{background:var(--like);padding:6px 8px;border-radius:6px;color:#fff;font-weight:800;font-size:13px}
+/* META ROW BELOW TITLE */
+.meta-row{
+    display:flex;
+    justify-content:flex-end;
+    margin-top:6px;
+}
 
-/* ads container */
-.ads{max-width:980px;margin:18px auto;text-align:center}
+/* LIKE BADGE (NEON STYLE) */
+.like-badge{
+    background:var(--like-bg);
+    color:var(--like-text);
+    padding:6px 8px;
+    border-radius:6px;
+    font-weight:800;
+    font-size:13px;
+    box-shadow:0 0 6px rgba(255,240,100,0.3);
+}
 
-/* clickable: use anchor wrapping */
-.card a{color:inherit;text-decoration:none;display:block}
+/* ADS BOX */
+.ads{
+    max-width:980px;
+    margin:20px auto;
+    text-align:center;
+}
 </style>
 </head>
 <body>
 
 <header class="header">
-  <div class="brand">BanglaHub</div>
-  <a class="join" href="https://t.me/DSSvdo" target="_blank">Join Us</a>
+    <div class="brand">BanglaHub</div>
+    <a class="join" href="https://t.me/DSSvdo" target="_blank">Join Us</a>
 </header>
 
 <main class="container">
-  <section id="grid" class="video-grid"></section>
+    <section id="grid" class="video-grid"></section>
 </main>
 
-<!-- social bar ad (script) -->
+<!-- Social bar -->
 <div class="ads">
-  <script src="//pl27896379.effectivegatecpm.com/a0/33/d0/a033d08e95956fd914684b1fff0b8680.js"></script>
+<script src="//pl27896379.effectivegatecpm.com/a0/33/d0/a033d08e95956fd914684b1fff0b8680.js"></script>
 </div>
 
-<!-- native ad -->
+<!-- Native ad -->
 <div class="ads">
-  <script async src="//pl27967475.effectivegatecpm.com/e1682f5b5155c961011e82faea551290/invoke.js"></script>
-  <div id="container-e1682f5b5155c961011e82faea551290"></div>
+<script async src="//pl27967475.effectivegatecpm.com/e1682f5b5155c961011e82faea551290/invoke.js"></script>
+<div id="container-e1682f5b5155c961011e82faea551290"></div>
 </div>
 
-<!-- bottom banner -->
+<!-- Banner ad -->
 <div class="ads">
 <script type="text/javascript">
-  atOptions = {'key':'1535101a42bd09dee1fb390e6f781fe3','format':'iframe','height':250,'width':300,'params':{}};
+atOptions = {'key':'1535101a42bd09dee1fb390e6f781fe3','format':'iframe','height':250,'width':300,'params':{}};
 </script>
 <script src="//www.highperformanceformat.com/1535101a42bd09dee1fb390e6f781fe3/invoke.js"></script>
 </div>
 
 <script>
-/* load videos.json and render cards
- videos.json items must include:
- { "id":"...","title":"...","thumb":"...","video_url":"...","views":"12.7k","likes":"78%","duration":"03:39" }
-*/
+/* Load & Render Videos */
 async function loadVideos(){
-  try{
-    const r = await fetch('videos.json', {cache:'no-store'});
-    const arr = await r.json();
-    render(arr);
-  }catch(e){
-    console.error(e);
-    document.getElementById('grid').innerHTML = '<div style="padding:20px;color:#bbb">No videos found</div>';
-  }
+    try{
+        const r = await fetch("videos.json", {cache:"no-store"});
+        const data = await r.json();
+        render(data);
+    }catch(err){
+        console.log(err);
+        document.getElementById("grid").innerHTML =
+        "<div style='color:#ccc;padding:20px;'>No Videos Found</div>";
+    }
 }
 
-function render(list){
-  const grid = document.getElementById('grid');
-  grid.innerHTML = '';
-  list.forEach(item=>{
-    const a = document.createElement('a');
-    a.href = 'video.html?src=' + encodeURIComponent(item.video_url || item.url || '');
-    // open in same tab
-    a.target = '_self';
-
-    const card = document.createElement('article');
-    card.className = 'card';
-
-    // inner html
-    card.innerHTML = `
-      <div class="thumb-wrap">
-        <img src="${escape(item.thumb)}" alt="${escape(item.title)}" />
-        <div class="play-overlay">
-          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
-        </div>
-        <div class="badge views-badge">👁️ ${escape(item.views || '0')}</div>
-        <div class="badge duration-badge">⏱ ${escape(item.duration || '')}</div>
-      </div>
-<style>.title{
-    font-weight:700;
-    font-size:15px;
-    line-height:1.2;
-    min-height:44px;
-    overflow:hidden;
-    color:white;}<style/>
-      <div class="body">
-        <div class="title">${escape(item.title||'Untitled')}</div>
-        <div class="meta-row">
-          <div style="color:var(--muted);font-size:13px"></div>
-          <div class="like-badge">👍 ${escape(item.likes||'0%')}</div>
-        </div>
-      </div>
-    `;
-    // append card into anchor then into grid
-    a.appendChild(card);
-    grid.appendChild(a);
-  });
+function render(arr){
+    const grid = document.getElementById("grid");
+    grid.innerHTML = "";
+    arr.forEach(v=>{
+        grid.innerHTML += `
+        <a href="${escape(v.video_url)}" target="_self">
+            <article class="card">
+                <div class="thumb-wrap">
+                    <img src="${escape(v.thumb)}" alt="">
+                    <div class="play-overlay">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+                    </div>
+                    <div class="badge views-badge">👁️ ${escape(v.views)}</div>
+                    <div class="badge duration-badge">⏱ ${escape(v.duration)}</div>
+                </div>
+                <div class="body">
+                    <div class="title">${escape(v.title)}</div>
+                    <div class="meta-row">
+                        <div class="like-badge">👍 ${escape(v.likes)}</div>
+                    </div>
+                </div>
+            </article>
+        </a>
+        `;
+    });
 }
 
-function escape(s){ return String(s||'').replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+/* Escape */
+function escape(s){
+    return String(s||"").replace(/[&<>"']/g,m=>({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[m]));
+}
 
 loadVideos();
 </script>
+
 </body>
 </html>

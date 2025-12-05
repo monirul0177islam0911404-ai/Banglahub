@@ -13,6 +13,7 @@ video{width:100%;height:auto;display:block}
 </style>
 </head>
 <body>
+
 <!-- 🔼 TOP BANNER -->
 <script type="text/javascript">
   atOptions = {
@@ -27,17 +28,12 @@ video{width:100%;height:auto;display:block}
   type="text/javascript"
   src="//www.highperformanceformat.com/30921df49dc35be6701cc3d7f8ca8108/invoke.js"
 ></script>
-  
-<!-- 🔽 SOCIAL BAR -->
-<script
-  type="text/javascript"
-  src="//pl27896379.effectivegatecpm.com/a0/33/d0/a033d08e95956fd914684b1fff0b8680.js"
-></script>
 </div>
 
 <div class="wrap">
   <div id="playerBox" class="player"></div>
-  
+</div>
+
 <!-- 🔽 NATIVE AD -->
 <script
   async="async"
@@ -45,7 +41,16 @@ video{width:100%;height:auto;display:block}
   src="//pl27967475.effectivegatecpm.com/e1682f5b5155c961011e82faea551290/invoke.js"
 ></script>
 <div id="container-e1682f5b5155c961011e82faea551290"></div>
+</div>
 
+<!-- 🔽 SOCIAL BAR -->
+<script
+  type="text/javascript"
+  src="//pl27896379.effectivegatecpm.com/a0/33/d0/a033d08e95956fd914684b1fff0b8680.js"
+></script>
+</div>
+
+<script>
 const q = new URLSearchParams(location.search);
 const src = decodeURIComponent(q.get("src") || "");
 
@@ -58,7 +63,7 @@ if(!src){
     let idMatch = src.match(/\/d\/([^\/]+)/);
     let id = idMatch ? idMatch[1] : "";
 
-    let iframe=document.creatElement("iframe");
+    let iframe=document.createElement("iframe");
     iframe.src="https://drive.google.com/file/d/"+id+"/preview";
     iframe.width="100%";iframe.height="520";
     iframe.allow="autoplay; fullscreen";iframe.style.border="0";

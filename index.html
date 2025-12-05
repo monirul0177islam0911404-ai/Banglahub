@@ -9,53 +9,72 @@
 :root{
   --bg:#07181a;
   --card:#0f2a2b;
-  --muted:#9fb0b0;
-  --accent:#ffb400;
+  --muted:#b9caca;
   --like:#184b56;
+  --text:#ffffff;
+  --badge-bg:rgba(0,0,0,0.65);
 }
+
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:#fff}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial}
 
-/* header */
-.header{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#0b3a3b}
-.brand{font-weight:800;font-size:20px}
-.join{background:#00c2ff;color:#002;padding:6px 10px;border-radius:8px;text-decoration:none;font-weight:700}
+.header{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px;background:#0b3a3b;
+}
+.brand{font-weight:800;font-size:22px}
+.join{
+  background:#00c2ff;color:#002;padding:7px 12px;
+  border-radius:8px;font-weight:700;text-decoration:none
+}
 
-/* grid desktop 4, mobile 2 */
 .container{max-width:1200px;margin:14px auto;padding:0 12px}
-.video-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-@media(max-width:1024px){.video-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:520px){.video-grid{grid-template-columns:repeat(2,1fr)}}
-
-/* fix BLUE text issue */
-.video-grid a{
-  color:inherit !important;
-  text-decoration:none !important;
+.video-grid{
+  display:grid;gap:14px;
+  grid-template-columns:repeat(4,1fr);
+}
+@media(max-width:900px){
+  .video-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:520px){
+  .video-grid{grid-template-columns:repeat(2,1fr)}
 }
 
-/* card */
-.card{background:var(--card);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+.card{background:var(--card);border-radius:10px;overflow:hidden}
 .thumb-wrap{position:relative;width:100%;padding-top:100%;background:#000}
-.thumb-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:6px}
-
-/* overlay badges */
-.badge{
-  position:absolute;bottom:8px;padding:6px 8px;border-radius:8px;
-  background:rgba(0,0,0,0.6);color:#fff;font-weight:700;font-size:13px;
-  display:flex;align-items:center;gap:6px;
+.thumb-wrap img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;border-radius:6px;
 }
-.views-badge{left:8px}
-.duration-badge{right:8px}
 
-/* text area */
-.body{padding:10px;display:flex;flex-direction:column;gap:8px}
-.title{font-weight:700;font-size:15px;line-height:1.2;color:#fff;min-height:44px}
+.badge{
+  position:absolute;bottom:8px;padding:5px 8px;
+  border-radius:6px;background:var(--badge-bg);
+  font-size:13px;font-weight:700;display:flex;gap:5px;
+}
+.views{left:8px}
+.duration{right:8px}
 
-/* like */
-.like-badge{background:var(--like);padding:6px 8px;border-radius:6px;font-size:13px;color:#fff;font-weight:700}
+.play-overlay{
+  position:absolute;left:50%;top:50%;
+  transform:translate(-50%,-50%);
+  width:80px;height:80px;border-radius:50%;
+  background:rgba(0,0,0,0.45);
+  display:flex;align-items:center;justify-content:center;
+}
+.play-overlay svg{width:40px;height:40px;fill:white}
 
-/* ads container */
-.ads{max-width:980px;margin:18px auto;text-align:center}
+.body{padding:10px}
+.title{
+  font-size:15px;font-weight:700;line-height:1.25;
+  color:var(--text);
+}
+.like-badge{
+  background:var(--like);padding:6px 8px;border-radius:6px;
+  font-size:13px;font-weight:700;margin-top:6px;width:max-content
+}
+
+.card a{text-decoration:none;color:inherit;display:block}
 </style>
 </head>
 
@@ -66,34 +85,25 @@ body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:
   <a class="join" href="https://t.me/DSSvdo" target="_blank">Join Us</a>
 </header>
 
-<main class="container">
+<div class="container">
   <section id="grid" class="video-grid"></section>
-</main>
+</div>
 
 <!-- Social Bar -->
-<div class="ads">
-<script src="//pl27896379.effectivegatecpm.com/a0/33/d0/a033d08e95956fd914684b1fff0b8680.js"></script>
-</div>
-
-<!-- Native Ad -->
-<div class="ads">
-<script async src="//pl27967475.effectivegatecpm.com/e1682f5b5155c961011e82faea551290/invoke.js"></script>
-<div id="container-e1682f5b5155c961011e82faea551290"></div>
-</div>
-
-<!-- Bottom Banner -->
-<div class="ads">
-<script>
-atOptions = {'key':'1535101a42bd09dee1fb390e6f781fe3','format':'iframe','height':250,'width':300,'params':{}};
-</script>
-<script src="//www.highperformanceformat.com/1535101a42bd09dee1fb390e6f781fe3/invoke.js"></script>
-</div>
+<script
+  type="text/javascript"
+  src="//pl27896379.effectivegatecpm.com/a0/33/d0/a033d08e95956fd914684b1fff0b8680.js"
+></script>
 
 <script>
 async function loadVideos(){
-  const res = await fetch("videos.json",{cache:"no-store"});
-  const list = await res.json();
-  render(list);
+  try{
+    const r = await fetch("videos.json?"+Date.now());
+    const data = await r.json();
+    render(data);
+  }catch(e){
+    document.getElementById("grid").innerHTML = "<div style='color:#ccc;padding:20px'>Failed to load videos</div>";
+  }
 }
 
 function render(list){
@@ -102,17 +112,19 @@ function render(list){
 
   list.forEach(v=>{
     const a = document.createElement("a");
-    a.href = "video.html?src=" + encodeURIComponent(v.video_url);
-    a.target = "_self";
+    a.href = "countdown.html?src=" + encodeURIComponent(v.video_url);
 
-    const card = document.createElement("article");
+    const card = document.createElement("div");
     card.className = "card";
 
     card.innerHTML = `
       <div class="thumb-wrap">
-        <img src="${v.thumb}" alt="">
-        <div class="badge views-badge">👁️ ${v.views}</div>
-        <div class="badge duration-badge">⏱ ${v.duration}</div>
+        <img src="${v.thumb}">
+        <div class="play-overlay">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="badge views">👁️ ${v.views}</div>
+        <div class="badge duration">⏱ ${v.duration}</div>
       </div>
 
       <div class="body">

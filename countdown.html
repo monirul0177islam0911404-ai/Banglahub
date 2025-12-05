@@ -7,104 +7,75 @@
 
 <style>
 body{
-  margin:0;
-  padding:0;
-  background:#07181a;
-  color:white;
-  font-family:Arial;
-  text-align:center;
+  background:#07181a;color:white;font-family:Arial;text-align:center;
+  margin:0;padding:0;
 }
-
-.box{
-  margin-top:60px;
-}
-
-.timer{
-  font-size:55px;
-  font-weight:800;
-  margin-top:20px;
-  color:#ffcc00;
-}
-
-.msg{
-  font-size:20px;
-  margin-top:10px;
-}
-
-.ads{
-  margin-top:25px;
-}
-
-/* countdown circle */
+.box{margin-top:60px}
 .circle{
-  width:120px;
-  height:120px;
-  margin:25px auto;
-  border-radius:50%;
-  border:8px solid rgba(255,255,255,0.2);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:42px;
-  font-weight:bold;
-  color:#ffcc00;
+  width:140px;height:140px;margin:20px auto;
+  border-radius:50%;border:10px solid rgba(255,255,255,0.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:48px;font-weight:800;color:#ffcc00;
 }
+.ads{margin:25px auto;text-align:center}
+.msg{font-size:20px}
 </style>
 </head>
 
 <body>
+<!-- Banner -->
+<script type="text/javascript">
+  atOptions = {
+  	'key' : '30921df49dc35be6701cc3d7f8ca8108',
+  	'format' : 'iframe',
+  	'height' : 50,
+  	'width' : 320,
+  	'params' : {}
+  };
+</script>
+<script
+  type="text/javascript"
+  src="//www.highperformanceformat.com/30921df49dc35be6701cc3d7f8ca8108/invoke.js"
+></script>
 
 <div class="box">
-  <div class="msg">আপনার ভিডিও প্রস্তুত হচ্ছে...</div>
-
-  <div class="circle" id="count">9</div>
+  <div class="msg">ভিডিও প্রস্তুত হচ্ছে...</div>
+  <div id="count" class="circle">9</div>
   <div class="msg">অনুগ্রহ করে অপেক্ষা করুন</div>
 </div>
+<!-- popunder -->
+<script
+  type="text/javascript"
+  src="//pl27901237.effectivegatecpm.com/9c/2d/9c/9c2d9cea847e545127aaf16aa663473f.js"
+></script>
 
-<!-- Banner Ad -->
-<div class="ads">
-<script type="text/javascript">
-atOptions = {
-'key' : '30921df49dc35be6701cc3d7f8ca8108',
-'format' : 'iframe',
-'height' : 50,
-'width' : 320,
-'params' : {}
-};
-</script>
-<script src="//www.highperformanceformat.com/30921df49dc35be6701cc3d7f8ca8108/invoke.js"></script>
-</div>
-
-<!-- Native Ad -->
-<div class="ads">
-<script async src="//pl27967475.effectivegatecpm.com/e1682f5b5155c961011e82faea551290/invoke.js"></script>
+<!-- Native -->
+<script
+  async="async"
+  data-cfasync="false"
+  src="//pl27967475.effectivegatecpm.com/e1682f5b5155c961011e82faea551290/invoke.js"
+></script>
 <div id="container-e1682f5b5155c961011e82faea551290"></div>
-</div>
 
 <!-- Social Bar -->
-<div class="ads">
-<script src="//pl27896379.effectivegatecpm.com/a0/33/d0/a033d08e95956fd914684b1fff0b8680.js"></script>
-</div>
-
-<!-- Popunder -->
-<script type='text/javascript' src='//pl6698754.effectivedisplaycontent.com/b9/11/4d/b9114d7c23dafe8a8810d8e0904e3aac.js'></script>
+<script
+  type="text/javascript"
+  src="//pl27896379.effectivegatecpm.com/a0/33/d0/a033d08e95956fd914684b1fff0b8680.js"
+></script>
 
 <script>
-// get video link from URL
-const urlParams = new URLSearchParams(window.location.search);
-const videoURL = urlParams.get("src");
+const p = new URLSearchParams(location.search);
+const src = p.get("src");
 
-// countdown
-let time = 9;
-const countDiv = document.getElementById("count");
+let t = 9;
+const box = document.getElementById("count");
 
 const timer = setInterval(()=>{
-  time--;
-  countDiv.innerText = time;
-
-  if(time <= 0){
+  t--;
+  box.textContent = t;
+  if(t<=0){
     clearInterval(timer);
-    window.location.href = "video.html?src=" + encodeURIComponent(videoURL);
+    window.location.href = "video.html?src=" + encodeURIComponent(src);
   }
 },1000);
 </script>
